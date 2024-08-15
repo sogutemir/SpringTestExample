@@ -44,6 +44,9 @@ public class UserServiceTest {
         user.setId(faker.number().randomNumber());
         user.setName(faker.name().fullName());
         user.setEmail(faker.internet().emailAddress());
+        user.setAddress(faker.address().fullAddress());
+        user.setPhoneNumber(faker.phoneNumber().phoneNumber());
+        user.setDateOfBirth(faker.date().birthday().toInstant().atZone(java.time.ZoneId.systemDefault()).toLocalDate());
 
         when(userRepository.findById(user.getId())).thenReturn(Optional.of(user));
 
@@ -53,6 +56,9 @@ public class UserServiceTest {
         assertEquals(user.getId(), userDTO.getId());
         assertEquals(user.getName(), userDTO.getName());
         assertEquals(user.getEmail(), userDTO.getEmail());
+        assertEquals(user.getAddress(), userDTO.getAddress());
+        assertEquals(user.getPhoneNumber(), userDTO.getPhoneNumber());
+        assertEquals(user.getDateOfBirth(), userDTO.getDateOfBirth());
     }
 
     @Test
@@ -60,11 +66,17 @@ public class UserServiceTest {
         UserDTO userDTO = new UserDTO();
         userDTO.setName(faker.name().fullName());
         userDTO.setEmail(faker.internet().emailAddress());
+        userDTO.setAddress(faker.address().fullAddress());
+        userDTO.setPhoneNumber(faker.phoneNumber().phoneNumber());
+        userDTO.setDateOfBirth(faker.date().birthday().toInstant().atZone(java.time.ZoneId.systemDefault()).toLocalDate());
 
         User user = new User();
         user.setId(faker.number().randomNumber());
         user.setName(userDTO.getName());
         user.setEmail(userDTO.getEmail());
+        user.setAddress(userDTO.getAddress());
+        user.setPhoneNumber(userDTO.getPhoneNumber());
+        user.setDateOfBirth(userDTO.getDateOfBirth());
 
         when(userRepository.save(any(User.class))).thenReturn(user);
 
@@ -74,6 +86,9 @@ public class UserServiceTest {
         assertEquals(user.getId(), savedUserDTO.getId());
         assertEquals(user.getName(), savedUserDTO.getName());
         assertEquals(user.getEmail(), savedUserDTO.getEmail());
+        assertEquals(user.getAddress(), savedUserDTO.getAddress());
+        assertEquals(user.getPhoneNumber(), savedUserDTO.getPhoneNumber());
+        assertEquals(user.getDateOfBirth(), savedUserDTO.getDateOfBirth());
     }
 
     @Test
@@ -82,10 +97,16 @@ public class UserServiceTest {
         user.setId(faker.number().randomNumber());
         user.setName(faker.name().fullName());
         user.setEmail(faker.internet().emailAddress());
+        user.setAddress(faker.address().fullAddress());
+        user.setPhoneNumber(faker.phoneNumber().phoneNumber());
+        user.setDateOfBirth(faker.date().birthday().toInstant().atZone(java.time.ZoneId.systemDefault()).toLocalDate());
 
         UserDTO userDTO = new UserDTO();
         userDTO.setName(faker.name().fullName());
         userDTO.setEmail(faker.internet().emailAddress());
+        userDTO.setAddress(faker.address().fullAddress());
+        userDTO.setPhoneNumber(faker.phoneNumber().phoneNumber());
+        userDTO.setDateOfBirth(faker.date().birthday().toInstant().atZone(java.time.ZoneId.systemDefault()).toLocalDate());
 
         when(userRepository.findById(user.getId())).thenReturn(Optional.of(user));
         when(userRepository.save(any(User.class))).thenReturn(user);
@@ -96,6 +117,9 @@ public class UserServiceTest {
         assertEquals(user.getId(), updatedUserDTO.getId());
         assertEquals(userDTO.getName(), updatedUserDTO.getName());
         assertEquals(userDTO.getEmail(), updatedUserDTO.getEmail());
+        assertEquals(userDTO.getAddress(), updatedUserDTO.getAddress());
+        assertEquals(userDTO.getPhoneNumber(), updatedUserDTO.getPhoneNumber());
+        assertEquals(userDTO.getDateOfBirth(), updatedUserDTO.getDateOfBirth());
     }
 
     @Test
@@ -116,6 +140,9 @@ public class UserServiceTest {
             user.setId(faker.number().randomNumber());
             user.setName(faker.name().fullName());
             user.setEmail(faker.internet().emailAddress());
+            user.setAddress(faker.address().fullAddress());
+            user.setPhoneNumber(faker.phoneNumber().phoneNumber());
+            user.setDateOfBirth(faker.date().birthday().toInstant().atZone(java.time.ZoneId.systemDefault()).toLocalDate());
             return user;
         }).limit(5).collect(Collectors.toList());
 
@@ -129,6 +156,9 @@ public class UserServiceTest {
             assertEquals(users.get(i).getId(), userDTOs.get(i).getId());
             assertEquals(users.get(i).getName(), userDTOs.get(i).getName());
             assertEquals(users.get(i).getEmail(), userDTOs.get(i).getEmail());
+            assertEquals(users.get(i).getAddress(), userDTOs.get(i).getAddress());
+            assertEquals(users.get(i).getPhoneNumber(), userDTOs.get(i).getPhoneNumber());
+            assertEquals(users.get(i).getDateOfBirth(), userDTOs.get(i).getDateOfBirth());
         }
     }
 
@@ -140,6 +170,9 @@ public class UserServiceTest {
             user.setId(faker.number().randomNumber());
             user.setName(name);
             user.setEmail(faker.internet().emailAddress());
+            user.setAddress(faker.address().fullAddress());
+            user.setPhoneNumber(faker.phoneNumber().phoneNumber());
+            user.setDateOfBirth(faker.date().birthday().toInstant().atZone(java.time.ZoneId.systemDefault()).toLocalDate());
             return user;
         }).limit(3).collect(Collectors.toList());
 
@@ -153,6 +186,9 @@ public class UserServiceTest {
             assertEquals(users.get(i).getId(), userDTOs.get(i).getId());
             assertEquals(users.get(i).getName(), userDTOs.get(i).getName());
             assertEquals(users.get(i).getEmail(), userDTOs.get(i).getEmail());
+            assertEquals(users.get(i).getAddress(), userDTOs.get(i).getAddress());
+            assertEquals(users.get(i).getPhoneNumber(), userDTOs.get(i).getPhoneNumber());
+            assertEquals(users.get(i).getDateOfBirth(), userDTOs.get(i).getDateOfBirth());
         }
     }
 
@@ -162,6 +198,9 @@ public class UserServiceTest {
         user.setId(faker.number().randomNumber());
         user.setName(faker.name().fullName());
         user.setEmail(faker.internet().emailAddress());
+        user.setAddress(faker.address().fullAddress());
+        user.setPhoneNumber(faker.phoneNumber().phoneNumber());
+        user.setDateOfBirth(faker.date().birthday().toInstant().atZone(java.time.ZoneId.systemDefault()).toLocalDate());
 
         when(userRepository.findByEmail(user.getEmail())).thenReturn(user);
 
@@ -171,6 +210,9 @@ public class UserServiceTest {
         assertEquals(user.getId(), userDTO.getId());
         assertEquals(user.getName(), userDTO.getName());
         assertEquals(user.getEmail(), userDTO.getEmail());
+        assertEquals(user.getAddress(), userDTO.getAddress());
+        assertEquals(user.getPhoneNumber(), userDTO.getPhoneNumber());
+        assertEquals(user.getDateOfBirth(), userDTO.getDateOfBirth());
     }
 
     @Test
@@ -181,6 +223,9 @@ public class UserServiceTest {
             user.setId(faker.number().randomNumber());
             user.setName(keyword + " " + faker.name().lastName());
             user.setEmail(faker.internet().emailAddress());
+            user.setAddress(faker.address().fullAddress());
+            user.setPhoneNumber(faker.phoneNumber().phoneNumber());
+            user.setDateOfBirth(faker.date().birthday().toInstant().atZone(java.time.ZoneId.systemDefault()).toLocalDate());
             return user;
         }).limit(3).collect(Collectors.toList());
 
@@ -194,6 +239,9 @@ public class UserServiceTest {
             assertEquals(users.get(i).getId(), userDTOs.get(i).getId());
             assertEquals(users.get(i).getName(), userDTOs.get(i).getName());
             assertEquals(users.get(i).getEmail(), userDTOs.get(i).getEmail());
+            assertEquals(users.get(i).getAddress(), userDTOs.get(i).getAddress());
+            assertEquals(users.get(i).getPhoneNumber(), userDTOs.get(i).getPhoneNumber());
+            assertEquals(users.get(i).getDateOfBirth(), userDTOs.get(i).getDateOfBirth());
         }
     }
 }

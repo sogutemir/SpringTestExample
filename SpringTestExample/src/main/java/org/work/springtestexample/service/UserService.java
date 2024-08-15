@@ -17,7 +17,7 @@ public class UserService {
 
     public UserDTO getUserById(Long id) {
         return userRepository.findById(id)
-                .map(user -> new UserDTO(user.getId(), user.getName(), user.getEmail()))
+                .map(user -> new UserDTO(user.getId(), user.getName(), user.getEmail(), user.getAddress(), user.getPhoneNumber(), user.getDateOfBirth()))
                 .orElse(null);
     }
 
@@ -25,8 +25,11 @@ public class UserService {
         User user = new User();
         user.setName(userDTO.getName());
         user.setEmail(userDTO.getEmail());
+        user.setAddress(userDTO.getAddress());
+        user.setPhoneNumber(userDTO.getPhoneNumber());
+        user.setDateOfBirth(userDTO.getDateOfBirth());
         user = userRepository.save(user);
-        return new UserDTO(user.getId(), user.getName(), user.getEmail());
+        return new UserDTO(user.getId(), user.getName(), user.getEmail(), user.getAddress(), user.getPhoneNumber(), user.getDateOfBirth());
     }
 
     public UserDTO updateUser(Long id, UserDTO userDTO) {
@@ -34,8 +37,11 @@ public class UserService {
                 .map(user -> {
                     user.setName(userDTO.getName());
                     user.setEmail(userDTO.getEmail());
+                    user.setAddress(userDTO.getAddress());
+                    user.setPhoneNumber(userDTO.getPhoneNumber());
+                    user.setDateOfBirth(userDTO.getDateOfBirth());
                     user = userRepository.save(user);
-                    return new UserDTO(user.getId(), user.getName(), user.getEmail());
+                    return new UserDTO(user.getId(), user.getName(), user.getEmail(), user.getAddress(), user.getPhoneNumber(), user.getDateOfBirth());
                 })
                 .orElse(null);
     }
@@ -46,27 +52,27 @@ public class UserService {
 
     public List<UserDTO> findAllUsers() {
         return userRepository.findAll().stream()
-                .map(user -> new UserDTO(user.getId(), user.getName(), user.getEmail()))
+                .map(user -> new UserDTO(user.getId(), user.getName(), user.getEmail(), user.getAddress(), user.getPhoneNumber(), user.getDateOfBirth()))
                 .collect(Collectors.toList());
     }
 
     public List<UserDTO> findUsersByName(String name) {
         return userRepository.findByName(name).stream()
-                .map(user -> new UserDTO(user.getId(), user.getName(), user.getEmail()))
+                .map(user -> new UserDTO(user.getId(), user.getName(), user.getEmail(), user.getAddress(), user.getPhoneNumber(), user.getDateOfBirth()))
                 .collect(Collectors.toList());
     }
 
     public UserDTO findByEmail(String email) {
         User user = userRepository.findByEmail(email);
         if (user != null) {
-            return new UserDTO(user.getId(), user.getName(), user.getEmail());
+            return new UserDTO(user.getId(), user.getName(), user.getEmail(), user.getAddress(), user.getPhoneNumber(), user.getDateOfBirth());
         }
         return null;
     }
 
     public List<UserDTO> searchByName(String keyword) {
         return userRepository.searchByName(keyword).stream()
-                .map(user -> new UserDTO(user.getId(), user.getName(), user.getEmail()))
+                .map(user -> new UserDTO(user.getId(), user.getName(), user.getEmail(), user.getAddress(), user.getPhoneNumber(), user.getDateOfBirth()))
                 .collect(Collectors.toList());
     }
 }
