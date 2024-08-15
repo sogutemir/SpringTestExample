@@ -1,4 +1,7 @@
 package org.work.springtestexample.repository;
 
-public interface ProductRepository {
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.work.springtestexample.model.Product;
+
+public interface ProductRepository extends JpaRepository<Product,Long> {
 }
